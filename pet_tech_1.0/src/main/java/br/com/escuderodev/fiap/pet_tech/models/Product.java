@@ -1,11 +1,15 @@
 package br.com.escuderodev.fiap.pet_tech.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "produto")
 public class Product {
@@ -23,46 +27,6 @@ public class Product {
         this.nameProduct = nameProduct;
         Description = description;
         this.valor = valor;
-        this.urlImage = urlImage;
-    }
-
-    public UUID getIdproduct() {
-        return idproduct;
-    }
-
-    public void setIdproduct(UUID idproduct) {
-        this.idproduct = idproduct;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
 
