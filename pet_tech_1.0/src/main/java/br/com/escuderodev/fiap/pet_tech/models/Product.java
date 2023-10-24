@@ -16,7 +16,7 @@ public class Product {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private UUID idproduct;
     private String nameProduct;
-    private String Description;
+    private String description;
     private BigDecimal valor;
     private String urlImage;
 
@@ -25,7 +25,7 @@ public class Product {
 
     public Product(String nameProduct, String description, BigDecimal valor, String urlImage) {
         this.nameProduct = nameProduct;
-        Description = description;
+        this.description = description;
         this.valor = valor;
         this.urlImage = urlImage;
     }
@@ -48,7 +48,7 @@ public class Product {
         return "Product{" +
                 "idproduct=" + idproduct +
                 ", nameProduct='" + nameProduct + '\'' +
-                ", Description='" + Description + '\'' +
+                ", Description='" + description + '\'' +
                 ", valor=" + valor +
                 ", urlImage='" + urlImage + '\'' +
                 '}';

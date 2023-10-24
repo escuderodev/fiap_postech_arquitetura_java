@@ -3,11 +3,9 @@ package br.com.escuderodev.fiap.pet_tech.controllers;
 import br.com.escuderodev.fiap.pet_tech.models.Product;
 import br.com.escuderodev.fiap.pet_tech.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -27,11 +25,27 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Product>> findById(@PathVariable UUID id) {
+    public ResponseEntity<Product> findById(@PathVariable UUID id) {
         var product = service.findProductById(id);
         return ResponseEntity.ok(product);
     }
 
+    @PostMapping
+    public ResponseEntity<Product> save(@RequestBody Product product) {
+        var saveProduct = service.save(product);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(saveProduct);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody Product product) {
+        product = service.update(id, product);
+        return ResponseEntity.ok(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
