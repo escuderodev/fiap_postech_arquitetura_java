@@ -1,4 +1,4 @@
-package br.com.escuderodev.fiap.pet_tech.models;
+package br.com.escuderodev.fiap.pet_tech.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,6 +21,14 @@ public class Product {
     private String urlImage;
 
     public Product() {
+    }
+
+    public Product(UUID idproduct, String nameProduct, String description, BigDecimal valor, String urlImage) {
+        this.idproduct = idproduct;
+        this.nameProduct = nameProduct;
+        this.description = description;
+        this.valor = valor;
+        this.urlImage = urlImage;
     }
 
     public Product(String nameProduct, String description, BigDecimal valor, String urlImage) {

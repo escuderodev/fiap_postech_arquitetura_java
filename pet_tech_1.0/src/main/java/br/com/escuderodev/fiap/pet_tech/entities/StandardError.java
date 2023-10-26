@@ -1,4 +1,4 @@
-package br.com.escuderodev.fiap.pet_tech.models;
+package br.com.escuderodev.fiap.pet_tech.entities;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package br.com.escuderodev.fiap.pet_tech.controllers;
+package br.com.escuderodev.fiap.pet_tech.controller.exception;
 
 public class NotFoundExceptionController extends RuntimeException{
 

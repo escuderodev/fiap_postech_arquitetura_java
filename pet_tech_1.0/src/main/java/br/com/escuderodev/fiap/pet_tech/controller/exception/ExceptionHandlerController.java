@@ -1,6 +1,6 @@
-package br.com.escuderodev.fiap.pet_tech.controllers;
+package br.com.escuderodev.fiap.pet_tech.controller.exception;
 
-import br.com.escuderodev.fiap.pet_tech.models.StandardError;
+import br.com.escuderodev.fiap.pet_tech.entities.StandardError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
