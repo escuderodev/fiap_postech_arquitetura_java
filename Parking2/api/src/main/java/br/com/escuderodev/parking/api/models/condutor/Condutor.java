@@ -23,10 +23,4 @@ public class Condutor {
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
     }
-
-    public void atualizaDados(DadosAtualizaCondutor dados) {
-        this.nome = dados.nome();
-        this.cpf = dados.cpf();
-        this.telefone = dados.telefone();
-    }
 }
