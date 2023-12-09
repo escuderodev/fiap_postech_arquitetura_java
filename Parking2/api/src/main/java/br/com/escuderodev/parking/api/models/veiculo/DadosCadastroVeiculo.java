@@ -2,6 +2,7 @@ package br.com.escuderodev.parking.api.models.veiculo;
 
 import br.com.escuderodev.parking.api.models.condutor.DadosCadastroCondutor;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroVeiculo(
         @NotBlank
@@ -10,6 +11,7 @@ public record DadosCadastroVeiculo(
         String modelo,
         @NotBlank
         String placa,
+        @NotNull
         DadosCadastroCondutor condutor
 ) {
 }

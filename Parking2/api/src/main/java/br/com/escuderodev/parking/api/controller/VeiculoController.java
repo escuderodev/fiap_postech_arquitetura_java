@@ -1,17 +1,16 @@
 package br.com.escuderodev.parking.api.controller;
 
-import br.com.escuderodev.parking.api.controller.exception.NotFoundExceptionController;
 import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
-import br.com.escuderodev.parking.api.models.veiculo.DadosAtualizaVeiculo;
 import br.com.escuderodev.parking.api.models.veiculo.DadosListagemVeiculo;
 import br.com.escuderodev.parking.api.models.condutor.Condutor;
 import br.com.escuderodev.parking.api.models.veiculo.Veiculo;
-import br.com.escuderodev.parking.api.models.condutor.CondutorRepository;
-import br.com.escuderodev.parking.api.models.veiculo.VeiculoRepository;
+import br.com.escuderodev.parking.api.service.CondutorService;
+import br.com.escuderodev.parking.api.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
@@ -22,61 +21,59 @@ import org.springframework.data.domain.Pageable;
 public class VeiculoController {
 
     @Autowired
-    private VeiculoRepository veiculoRepository;
+    private VeiculoService veiculoService;
 
     @Autowired
-    private CondutorRepository condutorRepository;
+    private CondutorService condutorService;
 
     @GetMapping
-    public Page<DadosListagemVeiculo> consultarVeiculos(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        return veiculoRepository.findAll(paginacao).map(DadosListagemVeiculo::new);
+    public ResponseEntity<Page<DadosListagemVeiculo>> consultarVeiculos(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
+        var page = veiculoService.findAll(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/ativo")
-    public Page<DadosListagemVeiculo> consultarVeiculosAtivos(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        return veiculoRepository.findAllByStatusTrue(paginacao).map(DadosListagemVeiculo::new);
+    public ResponseEntity<Page<DadosListagemVeiculo>> consultarVeiculosAtivos(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
+        var page = veiculoService.findByStatusTrue(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
-    public Veiculo consultarVeiculoPorId(@PathVariable Long id) {
-        return veiculoRepository.findById(id).orElseThrow(() -> new NotFoundExceptionController("Veículo não encontrado!"));
+    public ResponseEntity<Veiculo> consultarVeiculoPorId(@PathVariable Long id) {
+        var veiculo = veiculoService.findById(id);
+        return ResponseEntity.ok(veiculo);
     }
 
     @PostMapping
     @Transactional
     public void cadastrarVeiculo(@RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
-        var condutor = new Condutor(cadastroCondutorEVeiculoDTO.getDadosCondutor());
-        var veiculo = new Veiculo(cadastroCondutorEVeiculoDTO.getDadosVeiculo(), condutor);
-        condutorRepository.save(condutor);
-        veiculoRepository.save(veiculo);
+        veiculoService.createVehicle(cadastroCondutorEVeiculoDTO);
     }
 
     @PostMapping("/cadastrar-para-condutor/{condutorId}")
     @Transactional
     public void cadastrarVeiculoParaCondutorExistente(@PathVariable Long condutorId, @RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
-        var condutor = condutorRepository.findById(condutorId).orElseThrow(() -> new IllegalArgumentException("Condutor não encontrado com ID: " + condutorId));
-        var veiculo = new Veiculo(cadastroCondutorEVeiculoDTO.getDadosVeiculo(), condutor);
-        veiculoRepository.save(veiculo);
+        veiculoService.createVehicleForDriver(condutorId, cadastroCondutorEVeiculoDTO);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
-    public void  atualizarVeiculo(@RequestBody @Valid DadosAtualizaVeiculo dados) {
-        var veiculo = veiculoRepository.getReferenceById(dados.id());
-        veiculo.atualizaDados(dados);
+    public ResponseEntity atualizarVeiculo(@RequestBody @Valid Veiculo veiculo, @PathVariable Long id) {
+        var veiculoDigitado = veiculo;
+        veiculoService.update(veiculo, id);
+        return ResponseEntity.ok(veiculoDigitado);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public void deletarVeiculo(@PathVariable Long id) {
-        veiculoRepository.deleteById(id);
+        veiculoService.delete(id);
     }
 
     @DeleteMapping("logica/{id}")
     @Transactional
     public void exclusaoLogicaVeiculo(@PathVariable Long id) {
-        var veiculo = veiculoRepository.getReferenceById(id);
-        veiculo.exclusaoLogica();
+        veiculoService.logicalDeletionVehicle(id);
     }
 
 }

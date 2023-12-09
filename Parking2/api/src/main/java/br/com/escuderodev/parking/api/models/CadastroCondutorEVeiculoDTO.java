@@ -15,13 +15,4 @@ public class CadastroCondutorEVeiculoDTO {
     @Valid
     private DadosCadastroCondutor dadosCondutor;
 
-    // Construtores, getters e setters
-
-    public CadastroCondutorEVeiculoDTO(DadosCadastroVeiculo dadosVeiculo, DadosCadastroCondutor dadosCondutor) {
-        this.dadosVeiculo = dadosVeiculo;
-        this.dadosCondutor = dadosCondutor;
-    }
-
-    public CadastroCondutorEVeiculoDTO() {
-    }
 }

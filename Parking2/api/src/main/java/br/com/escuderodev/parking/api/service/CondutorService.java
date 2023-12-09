@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CondutorService {
 
@@ -18,6 +20,10 @@ public class CondutorService {
 
     public Page<DadosListagemCondutor> findAll(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
         return condutorRepository.findAll(paginacao).map(DadosListagemCondutor::new);
+    }
+
+    public Optional<Condutor> findById(Long id) {
+        return condutorRepository.findById(id);
     }
 
     public Condutor create(CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {

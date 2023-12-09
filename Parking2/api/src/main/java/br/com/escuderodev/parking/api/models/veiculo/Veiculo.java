@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
 
+import java.util.Optional;
+
 @Entity(name = "Veiculo")
 @Table(name = "veiculos")
 @Getter
@@ -24,26 +26,12 @@ public class Veiculo {
     @ManyToOne
     private Condutor condutor;
 
-    public Veiculo(@Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
-        this.marca = cadastroCondutorEVeiculoDTO.getDadosVeiculo().marca();
-        this.modelo = cadastroCondutorEVeiculoDTO.getDadosVeiculo().modelo();
-        this.placa = cadastroCondutorEVeiculoDTO.getDadosVeiculo().placa();
-        this.status = true;
-        this.condutor = condutor;
-    }
-
-    public Veiculo(DadosCadastroVeiculo dadosVeiculo, Condutor condutor) {
+    public Veiculo(@Valid DadosCadastroVeiculo dadosVeiculo, Condutor condutor) {
         this.marca = dadosVeiculo.marca();
         this.modelo = dadosVeiculo.modelo();
         this.placa = dadosVeiculo.placa();
         this.status = true;
         this.condutor = condutor;
-    }
-
-    public void atualizaDados(DadosAtualizaVeiculo dados) {
-        this.marca = dados.marca();
-        this.modelo = dados.modelo();
-        this.placa = dados.placa();
     }
 
     public void exclusaoLogica() {
