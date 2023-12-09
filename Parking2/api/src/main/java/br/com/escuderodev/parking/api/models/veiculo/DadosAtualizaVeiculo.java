@@ -1,4 +1,4 @@
-package br.com.escuderodev.parking.api.dto.veiculo;
+package br.com.escuderodev.parking.api.models.veiculo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

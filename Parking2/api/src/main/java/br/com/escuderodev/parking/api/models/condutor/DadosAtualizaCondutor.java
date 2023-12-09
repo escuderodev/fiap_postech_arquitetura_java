@@ -1,4 +1,4 @@
-package br.com.escuderodev.parking.api.dto.condutor;
+package br.com.escuderodev.parking.api.models.condutor;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

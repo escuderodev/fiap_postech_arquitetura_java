@@ -1,6 +1,6 @@
 package br.com.escuderodev.parking.api.controller.exception;
 
-import br.com.escuderodev.parking.api.models.StandardError;
+import br.com.escuderodev.parking.api.models.exception.StandardError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

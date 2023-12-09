@@ -1,8 +1,7 @@
-package br.com.escuderodev.parking.api.models;
+package br.com.escuderodev.parking.api.models.veiculo;
 
-import br.com.escuderodev.parking.api.dto.veiculo.CadastroVeiculoDTO;
-import br.com.escuderodev.parking.api.dto.veiculo.DadosAtualizaVeiculo;
-import br.com.escuderodev.parking.api.dto.veiculo.DadosCadastroVeiculo;
+import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
+import br.com.escuderodev.parking.api.models.condutor.Condutor;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -25,10 +24,10 @@ public class Veiculo {
     @ManyToOne
     private Condutor condutor;
 
-    public Veiculo(@Valid CadastroVeiculoDTO cadastroVeiculoDTO) {
-        this.marca = cadastroVeiculoDTO.getDadosVeiculo().marca();
-        this.modelo = cadastroVeiculoDTO.getDadosVeiculo().modelo();
-        this.placa = cadastroVeiculoDTO.getDadosVeiculo().placa();
+    public Veiculo(@Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
+        this.marca = cadastroCondutorEVeiculoDTO.getDadosVeiculo().marca();
+        this.modelo = cadastroCondutorEVeiculoDTO.getDadosVeiculo().modelo();
+        this.placa = cadastroCondutorEVeiculoDTO.getDadosVeiculo().placa();
         this.status = true;
         this.condutor = condutor;
     }

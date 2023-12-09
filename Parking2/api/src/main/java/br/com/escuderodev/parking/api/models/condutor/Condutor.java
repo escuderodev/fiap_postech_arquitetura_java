@@ -1,7 +1,5 @@
-package br.com.escuderodev.parking.api.models;
+package br.com.escuderodev.parking.api.models.condutor;
 
-import br.com.escuderodev.parking.api.dto.condutor.DadosAtualizaCondutor;
-import br.com.escuderodev.parking.api.dto.condutor.DadosCadastroCondutor;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;

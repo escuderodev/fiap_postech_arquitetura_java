@@ -1,6 +1,6 @@
-package br.com.escuderodev.parking.api.dto.veiculo;
+package br.com.escuderodev.parking.api.models.veiculo;
 
-import br.com.escuderodev.parking.api.dto.condutor.DadosCadastroCondutor;
+import br.com.escuderodev.parking.api.models.condutor.DadosCadastroCondutor;
 import jakarta.validation.constraints.NotBlank;
 
 public record DadosCadastroVeiculo(

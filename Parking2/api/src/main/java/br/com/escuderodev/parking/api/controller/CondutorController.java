@@ -1,10 +1,10 @@
 package br.com.escuderodev.parking.api.controller;
 
-import br.com.escuderodev.parking.api.dto.condutor.DadosAtualizaCondutor;
-import br.com.escuderodev.parking.api.dto.condutor.DadosListagemCondutor;
-import br.com.escuderodev.parking.api.dto.veiculo.CadastroVeiculoDTO;
-import br.com.escuderodev.parking.api.models.Condutor;
-import br.com.escuderodev.parking.api.repository.CondutorRepository;
+import br.com.escuderodev.parking.api.models.condutor.DadosAtualizaCondutor;
+import br.com.escuderodev.parking.api.models.condutor.DadosListagemCondutor;
+import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
+import br.com.escuderodev.parking.api.models.condutor.Condutor;
+import br.com.escuderodev.parking.api.models.condutor.CondutorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,8 +28,8 @@ public class CondutorController {
 
     @PostMapping
     @Transactional
-    public void cadastrarCondutor(@RequestBody @Valid CadastroVeiculoDTO cadastroVeiculoDTO) {
-        var condutor = new Condutor(cadastroVeiculoDTO.getDadosCondutor());
+    public void cadastrarCondutor(@RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
+        var condutor = new Condutor(cadastroCondutorEVeiculoDTO.getDadosCondutor());
         condutorRepository.save(condutor);
     }
 

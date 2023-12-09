@@ -1,15 +1,13 @@
 package br.com.escuderodev.parking.api.controller;
 
 import br.com.escuderodev.parking.api.controller.exception.NotFoundExceptionController;
-import br.com.escuderodev.parking.api.dto.condutor.DadosAtualizaCondutor;
-import br.com.escuderodev.parking.api.dto.condutor.DadosListagemCondutor;
-import br.com.escuderodev.parking.api.dto.veiculo.CadastroVeiculoDTO;
-import br.com.escuderodev.parking.api.dto.veiculo.DadosAtualizaVeiculo;
-import br.com.escuderodev.parking.api.dto.veiculo.DadosListagemVeiculo;
-import br.com.escuderodev.parking.api.models.Condutor;
-import br.com.escuderodev.parking.api.models.Veiculo;
-import br.com.escuderodev.parking.api.repository.CondutorRepository;
-import br.com.escuderodev.parking.api.repository.VeiculoRepository;
+import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
+import br.com.escuderodev.parking.api.models.veiculo.DadosAtualizaVeiculo;
+import br.com.escuderodev.parking.api.models.veiculo.DadosListagemVeiculo;
+import br.com.escuderodev.parking.api.models.condutor.Condutor;
+import br.com.escuderodev.parking.api.models.veiculo.Veiculo;
+import br.com.escuderodev.parking.api.models.condutor.CondutorRepository;
+import br.com.escuderodev.parking.api.models.veiculo.VeiculoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,18 +44,18 @@ public class VeiculoController {
 
     @PostMapping
     @Transactional
-    public void cadastrarVeiculo(@RequestBody @Valid CadastroVeiculoDTO cadastroVeiculoDTO) {
-        var condutor = new Condutor(cadastroVeiculoDTO.getDadosCondutor());
-        var veiculo = new Veiculo(cadastroVeiculoDTO.getDadosVeiculo(), condutor);
+    public void cadastrarVeiculo(@RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
+        var condutor = new Condutor(cadastroCondutorEVeiculoDTO.getDadosCondutor());
+        var veiculo = new Veiculo(cadastroCondutorEVeiculoDTO.getDadosVeiculo(), condutor);
         condutorRepository.save(condutor);
         veiculoRepository.save(veiculo);
     }
 
     @PostMapping("/cadastrar-para-condutor/{condutorId}")
     @Transactional
-    public void cadastrarVeiculoParaCondutorExistente(@PathVariable Long condutorId, @RequestBody @Valid CadastroVeiculoDTO cadastroVeiculoDTO) {
+    public void cadastrarVeiculoParaCondutorExistente(@PathVariable Long condutorId, @RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
         var condutor = condutorRepository.findById(condutorId).orElseThrow(() -> new IllegalArgumentException("Condutor não encontrado com ID: " + condutorId));
-        var veiculo = new Veiculo(cadastroVeiculoDTO.getDadosVeiculo(), condutor);
+        var veiculo = new Veiculo(cadastroCondutorEVeiculoDTO.getDadosVeiculo(), condutor);
         veiculoRepository.save(veiculo);
     }
 

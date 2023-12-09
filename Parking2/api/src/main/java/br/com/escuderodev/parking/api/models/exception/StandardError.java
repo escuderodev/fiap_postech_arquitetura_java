@@ -1,4 +1,4 @@
-package br.com.escuderodev.parking.api.models;
+package br.com.escuderodev.parking.api.models.exception;
 
 import lombok.Getter;
 import lombok.Setter;

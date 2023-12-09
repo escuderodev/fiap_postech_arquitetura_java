@@ -1,6 +1,6 @@
-package br.com.escuderodev.parking.api.dto.condutor;
+package br.com.escuderodev.parking.api.models.condutor;
 
-import br.com.escuderodev.parking.api.models.Condutor;
+import br.com.escuderodev.parking.api.models.condutor.Condutor;
 import jakarta.validation.constraints.NotBlank;
 
 public record DadosListagemCondutor(
