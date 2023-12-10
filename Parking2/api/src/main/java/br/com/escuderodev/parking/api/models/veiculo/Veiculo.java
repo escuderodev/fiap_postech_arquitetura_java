@@ -37,4 +37,10 @@ public class Veiculo {
     public void exclusaoLogica() {
         this.status = false;
     }
+
+    public void atualizaDados(Veiculo veiculo) {
+        this.marca = veiculo.marca;
+        this.modelo = veiculo.modelo;
+        this.placa = veiculo.placa;
+    }
 }

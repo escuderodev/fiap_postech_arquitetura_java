@@ -11,7 +11,6 @@ public record DadosCadastroVeiculo(
         String modelo,
         @NotBlank
         String placa,
-        @NotNull
         DadosCadastroCondutor condutor
 ) {
 }

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -46,14 +47,18 @@ public class VeiculoController {
 
     @PostMapping
     @Transactional
-    public void cadastrarVeiculo(@RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
-        veiculoService.createVehicle(cadastroCondutorEVeiculoDTO);
+    public ResponseEntity cadastrarVeiculo(@RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO, UriComponentsBuilder uriBuilder) {
+        var veiculo = veiculoService.createVehicle(cadastroCondutorEVeiculoDTO);
+        var uri = uriBuilder.path("veiculos/{id}").buildAndExpand(veiculo.getId()).toUri();
+        return ResponseEntity.created(uri).body(veiculo);
     }
 
     @PostMapping("/cadastrar-para-condutor/{condutorId}")
     @Transactional
-    public void cadastrarVeiculoParaCondutorExistente(@PathVariable Long condutorId, @RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO) {
-        veiculoService.createVehicleForDriver(condutorId, cadastroCondutorEVeiculoDTO);
+    public ResponseEntity cadastrarVeiculoParaCondutorExistente(@PathVariable Long condutorId, @RequestBody @Valid CadastroCondutorEVeiculoDTO cadastroCondutorEVeiculoDTO, UriComponentsBuilder uriBuilder) {
+        var veiculo = veiculoService.createVehicleForDriver(condutorId, cadastroCondutorEVeiculoDTO);
+        var uri = uriBuilder.path("veiculos/{id}").buildAndExpand(veiculo.getId()).toUri();
+        return ResponseEntity.created(uri).body(veiculo);
     }
 
     @PutMapping("/{id}")
@@ -66,14 +71,16 @@ public class VeiculoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void deletarVeiculo(@PathVariable Long id) {
+    public ResponseEntity deletarVeiculo(@PathVariable Long id) {
         veiculoService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("logica/{id}")
     @Transactional
-    public void exclusaoLogicaVeiculo(@PathVariable Long id) {
+    public ResponseEntity exclusaoLogicaVeiculo(@PathVariable Long id) {
         veiculoService.logicalDeletionVehicle(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

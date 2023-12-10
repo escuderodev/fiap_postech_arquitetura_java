@@ -51,9 +51,9 @@ public class VeiculoService {
     }
 
     public Veiculo update(Veiculo veiculo, Long id) {
-        veiculo.setId(id);
-        veiculoRepository.save(veiculo);
-        return veiculo;
+        var veiculoDigitado = veiculoRepository.getReferenceById(id);
+        veiculoDigitado.atualizaDados(veiculo);
+        return veiculoRepository.getReferenceById(id);
     }
 
     public void delete(@PathVariable Long id) {
