@@ -1,7 +1,7 @@
 # fiap_postech_arquitetura_java
 Repositório contendo os arquivos do projeto Parking.
 
-## requisitos funcionais
+## Requisitos Funcionais - Projeto Parking
 - Desenvolver API para Registro de Condutores e Veículos;
 
 - Desenvolver API para este registro Registro de Forma de Pagamento;
