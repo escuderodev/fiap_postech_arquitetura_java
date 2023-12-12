@@ -2,7 +2,6 @@ package br.com.escuderodev.parking.api.controller;
 
 import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
 import br.com.escuderodev.parking.api.models.veiculo.DadosListagemVeiculo;
-import br.com.escuderodev.parking.api.models.condutor.Condutor;
 import br.com.escuderodev.parking.api.models.veiculo.Veiculo;
 import br.com.escuderodev.parking.api.service.CondutorService;
 import br.com.escuderodev.parking.api.service.VeiculoService;
