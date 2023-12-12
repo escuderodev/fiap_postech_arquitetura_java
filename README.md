@@ -1,6 +1,9 @@
 # fiap_postech_arquitetura_java
 Repositório contendo os arquivos do projeto Parking.
 
+## documentação da API com Swagger
+http://localhost:8080/swagger-ui/index.html#/
+
 ## Requisitos Funcionais - Projeto Parking
 - Desenvolver API para Registro de Condutores e Veículos;
 
