@@ -23,8 +23,8 @@ public class VeiculoController {
     @Autowired
     private VeiculoService veiculoService;
 
-    @Autowired
-    private CondutorService condutorService;
+//    @Autowired
+//    private CondutorService condutorService;
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemVeiculo>> consultarVeiculos(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
