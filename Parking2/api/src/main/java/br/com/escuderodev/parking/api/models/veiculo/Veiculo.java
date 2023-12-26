@@ -2,6 +2,7 @@ package br.com.escuderodev.parking.api.models.veiculo;
 
 import br.com.escuderodev.parking.api.models.CadastroCondutorEVeiculoDTO;
 import br.com.escuderodev.parking.api.models.condutor.Condutor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Veiculo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

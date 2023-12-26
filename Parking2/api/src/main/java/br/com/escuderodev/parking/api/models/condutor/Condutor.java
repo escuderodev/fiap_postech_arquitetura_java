@@ -1,5 +1,6 @@
 package br.com.escuderodev.parking.api.models.condutor;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -11,6 +12,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Condutor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
