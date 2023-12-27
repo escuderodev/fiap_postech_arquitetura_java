@@ -1,100 +1,61 @@
-# fiap_postech_arquitetura_java
-Repositório contendo os arquivos do projeto Parking.
+# Documentação Funcional de Sistema de Parquímetro
 
-## documentação da API com Swagger
-http://localhost:8080/swagger-ui/index.html#/
+## Introdução
+Esta documentação apresenta o novo sistema de parquímetro que deve ser desenvolvido para atender às
+necessidades de uma cidade turística, que possui uma população de 300.000 habitantes, mas experimenta um
+aumento significativo durante a alta temporada, recebendo 250.000 visitantes adicionais, em média, com a mesma
+quantidade de veículos. Este sistema substituirá o sistema antigo, que é lento, não escalável e não confiável.
+Visão Geral do Sistema.
 
-## Requisitos Funcionais - Projeto Parking
-- Desenvolver API para Registro de Condutores e Veículos;
+O novo sistema de parquímetro foi projetado para lidar com a demanda crescente de estacionamento na
+cidade. Ele oferece funcionalidades tais, como registro de condutores e veículos, controle de tempo estacionado,
+opções flexíveis de pagamento e emissão de recibos.
 
-- Desenvolver API para este registro Registro de Forma de Pagamento;
+## Funcionalidades Principais
+### 1. Registro de Condutores e Veículos:
+- Os condutores podem se registrar no sistema, associando seus dados pessoais, como nome, endereço e
+informações de contato.
+- Um condutor pode vincular vários veículos à sua conta, facilitando o gerenciamento de múltiplos veículos.
 
-- Controle de Tempo Estacionado;
-  - Alertas de Tempo Estacionado;
-  - desenvolver lógica para estes controles.
+### 2. Registro de Forma de Pagamento:
+- Antes de usar o sistema, o condutor deve registrar sua forma de pagamento preferida, que pode incluir
+cartão de crédito, débito ou PIX.
+- A opção PIX só está disponível para períodos de estacionamento fixos.
 
-- Opções de Pagamento - utilizar APIs externas;
+### 3. Controle de Tempo Estacionado:
+- O sistema permite iniciar o período de estacionamento, oferecendo opções de tempo fixo ou por hora.
+- Para períodos fixos, o sistema requer que o condutor indique a duração desejada no momento do registro.
+- Para períodos variáveis, o sistema inicia o tempo de estacionamento automaticamente.
+- O sistema monitora o tempo com precisão para garantir a cobrança correta.
 
-- Emissão de Recibos - pode ser um arquivo PDF;
+### 4. Alertas de Tempo Estacionado:
+- O sistema inclui um recurso de alerta que notifica o condutor quando o tempo de estacionamento está
+prestes a expirar, no caso de horário fixo.
+- Para períodos variáveis, o sistema também emite um alerta informando que o sistema estenderá
+automaticamente o estacionamento por mais uma hora, a menos que o condutor desligue o registro.
 
-## controllers
-- Veículo;
-- Condutor;
+### 5. Opções de Pagamento:
+- Os condutores têm a opção de pagar pelo estacionamento de várias maneiras, incluindo cartão de crédito,
+débito ou PIX, dependendo da forma de pagamento registrada.
+- A cobrança é baseada no tempo utilizado; para tempos fixos, o valor total é cobrado independentemente do
+tempo real utilizado, enquanto para períodos variáveis, a cobrança é por hora completa.
+Pós-Tech Arquitetura e Desenvolvimento JAVA – 1ADJT Página 1 de 2
 
-## endpoints
-### Condutores
-  - GET consultarCondutor = http://localhost:8080/condutores
-    Retorna um JSON com todos os condutores cadastrados.
-    
-  - POST cadastrarCondutor = http://localhost:8080/condutores
-      Recebe um JSON conforme abaixo:
-        {
-          "dadosCondutor": {
-          "nome": "Ronaldinho",
-          "cpf": "345.543.657-34",
-          "telefone": "(12) 3456-7890"
-          }
-        }
-    
-  - PUT atualizarCondutor = http://localhost:8080/condutores/id
-        Recebe o ID como parâmetro na URL e um JSON conforme abaixo:
-        {
-          "dadosCondutor": {
-          "nome": "Ronaldinho",
-          "cpf": "345.543.657-34",
-          "telefone": "(12) 3456-7890"
-          }
-        }
-    
-  - DELETE deletarCondutor = http://localhost:8080/condutores/id
-      Recebe o id como parâmetro. 
+### 6. Emissão de Recibos:
+- O sistema emite recibos automaticamente sempre que o tempo de estacionamento é encerrado e a
+cobrança é realizada.
+- Os recibos fornecem informações detalhadas, incluindo o tempo estacionado, a tarifa aplicada e o valor
+total pago.
 
-### Veículos
-  - GET consultarVeiculos = http://localhost:8080/veiculos
-    Retorna um JSON com todos os veículos cadastrados.
-
-  - GET consultarVeiculosAtivos = http://localhost:8080/veiculos/ativo
-    Retorna um JSON com todos os veículos cadastrados com status igual a true.
-    
-  - GET consultarVeiculosPorId = http://localhost:8080/veiculos/id
-    Retorna um JSON com todos os veículos cadastradosos dados do veículo referente ao ID informado.
-
-  - POST cadastrarVeiculoECondutor = http://localhost:8080/veiculos
-      Recebe um JSON conforme abaixo:
-      {
-        "dadosVeiculo": {
-          "marca": "Teste",
-          "modelo": "Teste modelo",
-          "placa": "FTZ123"
-      },
-        "dadosCondutor": {
-          "nome": "Teste condutor",
-          "cpf": "345.543.657-34",
-          "telefone": "(12) 3456-7890"
-        }
-      }
-    
-  - POST cadastrarVeiculoParaCondutorExistente = http://localhost:8080/veiculos/cadastrar-para-condutor/id
-        Recebe o ID como parâmetro na URL e um JSON conforme abaixo:
-        {
-        "dadosVeiculo": {
-          "marca": "Teste",
-          "modelo": "Teste 2",
-          "placa": "ABC9N56"
-          }
-        }
-    
-  - PUT atualizarVeiculo = http://localhost:8080/veiculos/id
-        Recebe o ID como parâmetro na URL e um JSON conforme abaixo:
-        {
-          "marca": "MCLaren",
-          "modelo": "Senna",
-          "placa": "FVC9N56"
-        }
-    
-  - DELETE deletarVeiculo = http://localhost:8080/veiculos/id
-      Recebe o id como parâmetro na URL.
-  
-  - DELETE esclusaoLogicaVeiculo = http://localhost:8080/veiculos/logica/id
-      Recebe o id como parâmetro na URL.
-
+### Fluxo de Trabalho:
+1. O condutor se registra no sistema, fornecendo informações pessoais.
+2. O condutor registra sua forma de pagamento preferida (cartão de crédito, débito ou PIX).
+3. O condutor inicia o registro de tempo no sistema, escolhendo entre tempo fixo (indicando a duração desejada) ou
+por hora.
+4. O sistema monitora o tempo de estacionamento e cobra o valor adequado com base nas opções de pagamento
+selecionadas.
+5. Para horários fixos, o sistema emite um alerta quando o tempo está prestes a expirar.
+6. Para períodos variáveis, o sistema emite um alerta informando que estenderá automaticamente o estacionamento
+por mais uma hora, a menos que o condutor desligue o registro.
+7. Quando o tempo de estacionamento é encerrado, o sistema emite um recibo para o condutor.
+Pós-Tech Arquitetura e Desenvolvimento JAVA – 1ADJT Página 2 de 2
