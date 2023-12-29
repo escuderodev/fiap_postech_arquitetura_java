@@ -10,9 +10,11 @@ public record DadosListagemCondutor(
         @NotBlank
         String cpf,
         @NotBlank
-        String telefone
+        String telefone,
+        @NotBlank
+        String endereco
 ) {
         public DadosListagemCondutor(Condutor condutor) {
-                this(condutor.getId(), condutor.getNome(), condutor.getCpf(), condutor.getTelefone());
+                this(condutor.getId(), condutor.getNome(), condutor.getCpf(), condutor.getTelefone(), condutor.getEndereco());
         }
 }

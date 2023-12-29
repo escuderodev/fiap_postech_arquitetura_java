@@ -19,10 +19,12 @@ public class Condutor {
     private String nome;
     private String cpf;
     private String telefone;
+    private String endereco;
 
     public Condutor(@Valid DadosCadastroCondutor dados) {
         this.nome = dados.nome();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
+        this.endereco = dados.endereco();
     }
 }

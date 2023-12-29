@@ -9,6 +9,8 @@ public record DadosCadastroCondutor(
         @NotBlank
         String cpf,
         @NotBlank
-        String telefone
+        String telefone,
+        @NotBlank
+        String endereco
 ) {
 }
