@@ -1,17 +1,13 @@
 package br.com.escuderodev.parking.api.models.estacionamento;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class HoraServidor {
-    private LocalDate date = LocalDate.now();
-    private LocalTime time = LocalTime.now();
+    private LocalDateTime horarioServidor = LocalDateTime.now();
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public LocalTime getTime() {
-        return time;
+    public LocalDateTime getHorarioServidor() {
+        return horarioServidor;
     }
 }
